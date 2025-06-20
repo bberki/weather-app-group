@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
-import AuthPage from './components/AuthPage';
-import SearchBar from './components/searchbar';
-import WeatherCard from './components/WeatherCard';
-import './App.css';
+import { useState } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
+import WeatherApp from './WeatherApp';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
+
   const [user, setUser] = useState(null);
   const [weatherList, setWeatherList] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -93,39 +94,15 @@ function App() {
               Çıkış Yap
             </button>
           </div>
+
         )}
-      </header>
-
-      <SearchBar onSearch={handleSearch} />
-
-      {weatherList.length > 0 && weatherList[currentIndex] && (
-        <div className="weather-carousel">
-          <WeatherCard
-            data={weatherList[currentIndex]}
-            onDelete={handleDelete}
-            user={user}
-            onLoginRequest={() => setShowLogin(true)}
-          />
-        </div>
-      )}
-
-      {weatherList.length > 1 && (
-        <div className="nav-buttons">
-          <button
-            onClick={() => setCurrentIndex(i => Math.max(i - 1, 0))}
-            disabled={currentIndex === 0}
-          >
-            ⬅
-          </button>
-          <button
-            onClick={() => setCurrentIndex(i => Math.min(i + 1, weatherList.length - 1))}
-            disabled={currentIndex === weatherList.length - 1}
-          >
-            ➡
-          </button>
-        </div>
-      )}
-    </div>
+      </nav>
+      <Routes>
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage onLogin={setUsername} />} />
+        <Route path="/" element={<WeatherApp username={username} onLogout={handleLogout} />} />
+      </Routes>
+    </>
   );
 }
 
