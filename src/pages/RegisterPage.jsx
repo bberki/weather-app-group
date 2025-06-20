@@ -8,11 +8,25 @@ function RegisterPage() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !email || !password) return;
-    alert('Kayıt başarılı!');
-    navigate('/login');
+
+    try {
+      const res = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, email, password }),
+      });
+
+      if (!res.ok) throw new Error('Register failed');
+
+      alert('Kayıt başarılı!');
+      navigate('/login');
+    } catch (err) {
+      console.error(err);
+      alert('Kayıt başarısız');
+    }
   };
 
   return (

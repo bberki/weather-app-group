@@ -21,6 +21,13 @@ npm run dev
 
 Projede gezinme için `react-router-dom` paketine ihtiyaç vardır. Bağımlılıkların kurulduğundan emin olmak için `npm install` komutunu çalıştırın.
 
+MongoDB kullanmak için kök dizindeki `.env` dosyasına bağlantı adresinizi
+`MONGO_URI` olarak ekleyin ve sunucuyu aşağıdaki komutla başlatın:
+
+```bash
+npm run start:server
+```
+
 Bu komutlar gerekli paketleri kurar ve geliştirme sunucusunu `http://localhost:5173` adresinde başlatır.
 
 ## Proje Yapısı
