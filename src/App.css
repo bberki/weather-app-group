@@ -1,0 +1,316 @@
+/* === GENEL SAYFA STİLİ === */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  min-height: 120vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-position: center;
+  transition: background 1s ease-in-out, background-image 1s ease-in-out;
+}
+
+/* === BAŞLIK === */
+h1 {
+  font-size: 2.5rem;
+  color: #1a2a6c;
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* === SEARCH BAR === */
+.search-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  transition: 0.3s;
+  width: 240px;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.4);
+}
+
+.search-button {
+  background-color: #007bff;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+/* === WEATHER CARD === */
+.weather-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  max-width: 380px;
+  width: 100%;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+}
+
+.weather-location {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+}
+
+.weather-icon {
+  width: 100px;
+  height: 100px;
+  margin: 1rem auto;
+  border-radius: 50%;
+  background-color: transparent;
+  padding: 10px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.weather-description {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 1.2rem;
+}
+
+.weather-card p {
+  font-size: 1rem;
+  margin: 0.4rem 0;
+}
+
+.weather-card strong {
+  color: #1a2a6c;
+}
+
+/* === ANİMASYON === */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+.weather-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 1rem;
+}
+
+.weather-carousel {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.nav-buttons button {
+  font-size: 1.2rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background-color: #1a2a6c;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav-buttons button:hover:not(:disabled) {
+  background-color: #3249a8;
+}
+
+.nav-buttons button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #1e3c72;
+  margin-bottom: 1rem;
+}
+
+.logout-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: #e60000;
+}
+
+.user-info {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.user-email {
+  color: #1a2a6c;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.suggestion-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background: white;
+  border: 1px solid #ccc;
+  width: 220px;
+  max-height: 150px;
+  overflow-y: auto;
+  position: absolute;
+  z-index: 1000;
+}
+
+.suggestion-list li {
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+.suggestion-list li:hover {
+  background-color: #f0f0f0;
+}
+
+.delete-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.delete-btn:hover {
+  background-color: #d9363e;
+}
+
+.delete-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255,77,79,0.3);
+}
+
+.login-pop-up {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.comment-toggle-button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.comment-toggle-button:hover {
+  background-color: #0056b3;
+}
+
+.comment-section {
+  margin-top: 12px;
+  text-align: left;
+}
+
+.comment-input {
+  width: 100%;
+  resize: none;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 8px;
+}
+
+.comment-button {
+  margin-top: 6px;
+  padding: 6px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.comment-item {
+  padding: 6px 0;
+  border-top: 1px solid #ccc;
+}
+
+.comment-warning {
+  font-style: italic;
+  color: #888;
+  margin-top: 10px;
+}
