@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
 import WeatherApp from './WeatherApp';
 import LoginPage from './pages/LoginPage';
@@ -9,6 +9,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 function App() {
 
   const [user, setUser] = useState(null);
+  const [username, setUsername] = useState('');
   const [weatherList, setWeatherList] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showLogin, setShowLogin] = useState(false);
@@ -27,7 +28,7 @@ function App() {
     document.body.style.padding = "0";
   }, [weatherList, currentIndex]);
 
-  const handleSearch = async (cityId) => {
+  const HandleSearch = async (cityId) => {
     if (!cityId) return;
 
     try {
@@ -51,7 +52,7 @@ function App() {
     }
   };
 
-  const handleDelete = (id) => {
+  const HandleDelete = (id) => {
     const updated = weatherList.filter(item => item.id !== id);
     setWeatherList(updated);
     if (updated.length === 0) {
@@ -96,13 +97,13 @@ function App() {
           </div>
 
         )}
-      </nav>
+      </header>
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage onLogin={setUsername} />} />
         <Route path="/" element={<WeatherApp username={username} onLogout={handleLogout} />} />
       </Routes>
-    </>
+    </div>
   );
 }
 
