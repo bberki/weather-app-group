@@ -10,7 +10,6 @@ function App() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showLogin, setShowLogin] = useState(false);
 
-  const currentCity = weatherList[currentIndex]?.location_name?.toLowerCase();
 
   useEffect(() => {
     const bgUrl =
@@ -40,6 +39,10 @@ function App() {
         wind_direction: 270,
         pressure: 1013,
         icon_code: "01d",
+        expertOpinions: [
+          "Önümüzdeki hafta sıcaklıklar mevsim normallerinde olacak.",
+          "Rüzgar güneybatı yönünden esecek, tarım faaliyetleri için uygun." 
+        ],
       },
       istanbul: {
         id: "istanbul",
@@ -54,6 +57,10 @@ function App() {
         wind_direction: 120,
         pressure: 1012,
         icon_code: "03d",
+        expertOpinions: [
+          "Nem oranı yüksek, kronik rahatsızlığı olanlar dikkatli olmalı.",
+          "Yağış ihtimali düşük, hava çoğunlukla bulutlu seyredecek." 
+        ],
       },
       izmir: {
         id: "izmir",
@@ -68,6 +75,10 @@ function App() {
         wind_direction: 90,
         pressure: 1009,
         icon_code: "02d",
+        expertOpinions: [
+          "Parçalı bulutlu hava deniz ulaşımını etkilemeyecek.",
+          "Hafta sonu sıcaklıklar birkaç derece artacak." 
+        ],
       }
     };
 

@@ -187,6 +187,22 @@ h1 {
   background-color: #e60000;
 }
 
+.login-btn {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  margin-top: 1rem;
+}
+
+.login-btn:hover {
+  background-color: #125bb5;
+}
+
 .user-info {
   position: absolute;
   top: 1.5rem;
@@ -246,7 +262,7 @@ h1 {
   box-shadow: 0 0 0 3px rgba(255,77,79,0.3);
 }
 
-.login-pop-up {
+.login-popup {
   position: fixed;
   top: 0;
   left: 0;
@@ -313,4 +329,16 @@ h1 {
   font-style: italic;
   color: #888;
   margin-top: 10px;
+}
+
+.expert-opinions {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  background-color: rgba(255,255,255,0.8);
+  border-radius: 6px;
+}
+
+.expert-opinions ul {
+  list-style: disc;
+  padding-left: 1.2rem;
 }

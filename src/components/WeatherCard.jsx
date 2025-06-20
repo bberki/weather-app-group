@@ -20,9 +20,22 @@ function WeatherCard( { data, onDelete, user, onLoginRequest }) {
             <button className='delete-btn' onClick={() => onDelete(data.id)}>
                 🗑 Sil
             </button>
-            
-            
 
+            {user ? (
+                <>
+                    <div className="expert-opinions">
+                        <h3>Uzman Görüşleri</h3>
+                        <ul>
+                            {(data.expertOpinions || []).map((op, i) => (
+                                <li key={i}>{op}</li>
+                            ))}
+                        </ul>
+                    </div>
+                    <CommentSection city={data.location_name} user={user} />
+                </>
+            ) : (
+                <button className="login-btn" onClick={onLoginRequest}>Giriş Yap</button>
+            )}
         </div>
     );
 }
