@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import './auth.css';
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 function AuthPage( { onLogin }){
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState("");
@@ -14,7 +12,7 @@ function AuthPage( { onLogin }){
 
         if (email && password) {
             try {
-                const res = await fetch(`${API_URL}/login`, {
+                const res = await fetch('/api/auth/login', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })
@@ -22,7 +20,7 @@ function AuthPage( { onLogin }){
                 if (!res.ok) throw new Error('Login failed');
                 const data = await res.json();
                 localStorage.setItem('token', data.token);
-                onLogin({ email });
+                onLogin({ email, token: data.token });
             } catch {
                 alert('Giriş başarısız');
             }

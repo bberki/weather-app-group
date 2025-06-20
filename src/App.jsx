@@ -9,7 +9,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 function App() {
 
   const [user, setUser] = useState(null);
-  const [username, setUsername] = useState('');
   const [weatherList, setWeatherList] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showLogin, setShowLogin] = useState(false);
@@ -100,8 +99,8 @@ function App() {
       </header>
       <Routes>
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage onLogin={setUsername} />} />
-        <Route path="/" element={<WeatherApp username={username} onLogout={handleLogout} />} />
+        <Route path="/login" element={<LoginPage onLogin={setUser} />} />
+        <Route path="/" element={<WeatherApp user={user} onLogout={handleLogout} />} />
       </Routes>
     </div>
   );

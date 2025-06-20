@@ -7,12 +7,27 @@ function LoginPage({ onLogin }) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!username || !password) return;
-    localStorage.setItem('token', 'fake-jwt-token');
-    if (onLogin) onLogin(username);
-    navigate('/');
+
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: username, password }),
+      });
+
+      if (!res.ok) throw new Error('Login failed');
+
+      const data = await res.json();
+      localStorage.setItem('token', data.token);
+      if (onLogin) onLogin({ email: username, token: data.token });
+      navigate('/');
+    } catch (err) {
+      console.error(err);
+      alert('Giriş başarısız');
+    }
   };
 
   return (

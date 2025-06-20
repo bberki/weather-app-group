@@ -4,7 +4,7 @@ import SearchBar from './components/searchbar';
 import WeatherCard from './components/WeatherCard';
 import './App.css';
 
-function WeatherApp({ username, onLogout }) {
+function WeatherApp({ user, onLogout }) {
   const navigate = useNavigate();
   const [weatherList, setWeatherList] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -121,9 +121,9 @@ function WeatherApp({ username, onLogout }) {
 
       <header className="app-header">
         <h1>Meteosphere🌤️</h1>
-        {username && (
+        {user && (
           <div className="user-info">
-            <span className="user-email">{username}</span>
+            <span className="user-email">{user.email}</span>
             <button className="logout-btn" onClick={handleLogout}>Çıkış Yap</button>
           </div>
         )}
@@ -136,7 +136,7 @@ function WeatherApp({ username, onLogout }) {
           <WeatherCard
             data={weatherList[currentIndex]}
             onDelete={handleDelete}
-            user={username ? { email: username } : null}
+            user={user}
             onLoginRequest={() => navigate('/login')}
           />
         </div>
