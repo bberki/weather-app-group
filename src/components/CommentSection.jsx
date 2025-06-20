@@ -36,7 +36,7 @@ function CommentSection ( { city , user}) {
 
             <ul className="comment-list">
                 {comments.map((c, i) => (
-                    <li key={i} className="component-item">
+                    <li key={i} className="comment-item">
                         <strong>{c.user}</strong> ({c.date}): <br /> {c.text}
                     </li>
                 ))}
