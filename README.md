@@ -19,6 +19,8 @@ npm install
 npm run dev
 ```
 
+Projede gezinme için `react-router-dom` paketine ihtiyaç vardır. Bağımlılıkların kurulduğundan emin olmak için `npm install` komutunu çalıştırın.
+
 Bu komutlar gerekli paketleri kurar ve geliştirme sunucusunu `http://localhost:5173` adresinde başlatır.
 
 ## Proje Yapısı
