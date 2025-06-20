@@ -6,11 +6,24 @@ function AuthPage( { onLogin }){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if(email && password) {
-            onLogin ({ email });
+        if (!email || !password) return;
+
+        try {
+            const res = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (!res.ok) throw new Error('login failed');
+
+            const data = await res.json();
+            onLogin({ email, token: data.token });
+        } catch {
+            alert('Giris basarisiz');
         }
     };
 
