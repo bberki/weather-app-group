@@ -1,4 +1,3 @@
-import './styles.css';
 import CommentSection from "./CommentSection";
 
 function WeatherCard( { data, onDelete, user, onLoginRequest }) {
