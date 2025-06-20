@@ -22,21 +22,24 @@ function CommentSection ( { city , user}) {
     }
 
     return (
-        <div className="comment-section">
+        <div className="comment-section bg-white bg-opacity-70 backdrop-blur rounded-xl p-4 mt-4 shadow max-w-md w-full">
             <textarea
-                className="comment-input"
+                className="comment-input w-full p-2 border rounded"
                 placeholder={`${city} için yorumunuzu yazın...`}
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
                 rows={2}
             />
-            <button className="comment-button" onClick={handleSubmit}>
+            <button
+                className="comment-button mt-2 bg-green-600 text-white py-1 px-3 rounded hover:bg-green-700"
+                onClick={handleSubmit}
+            >
                 Gonder
             </button>
 
-            <ul className="comment-list">
+            <ul className="comment-list mt-4 space-y-2">
                 {comments.map((c, i) => (
-                    <li key={i} className="comment-item">
+                    <li key={i} className="comment-item p-3 rounded-lg bg-white shadow">
                         <strong>{c.user}</strong> ({c.date}): <br /> {c.text}
                     </li>
                 ))}

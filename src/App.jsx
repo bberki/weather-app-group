@@ -81,12 +81,17 @@ function App() {
         </div>
       )}
 
-      <header className="app-header">
-        <h1>Meteosphere🌤️</h1>
+      <header className="app-header flex justify-between items-center w-full max-w-2xl p-4 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white rounded-md">
+        <h1 className="text-xl font-semibold">Meteosphere🌤️</h1>
         {user && (
-          <div className="user-info">
-            <span className="user-email">{user.email}</span>
-            <button className="logout-btn" onClick={handleLogout}>Çıkış Yap</button>
+          <div className="flex items-center gap-2">
+            <span className="text-sm">{user.email}</span>
+            <button
+              className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded"
+              onClick={handleLogout}
+            >
+              Çıkış Yap
+            </button>
           </div>
         )}
       </header>
