@@ -1,12 +1,29 @@
-# React + Vite
+# Meteosphere
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Meteosphere, React ve Vite kullanılarak geliştirilmiş basit bir hava durumu uygulamasıdır. Kullanıcılar Türkiye'nin büyük şehirlerinde güncel hava durumu bilgilerini görüntüleyebilir, giriş yaparak yorum bırakabilir ve farklı şehirler arasında geçiş yapabilir.
 
-Currently, two official plugins are available:
+## Özellikler
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Ankara, İstanbul ve İzmir için mock hava durumu verileri
+- Şehir arama ve sonuçları arasında gezinme
+- Giriş yapmış kullanıcılar için yorum ekleme
 
-## Expanding the ESLint configuration
+## Kurulum
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Projeyi çalıştırmak için Node.js yüklü olmalıdır. Ardından aşağıdaki adımları izleyin:
+
+```bash
+npm install
+npm run dev
+```
+
+Bu komutlar gerekli paketleri kurar ve geliştirme sunucusunu `http://localhost:5173` adresinde başlatır.
+
+## Proje Yapısı
+
+- **src/**: React bileşenleri ve stiller
+- **public/**: Uygulamada kullanılan statik dosyalar
+
+## Lisans
+
+Bu proje MIT lisansı ile lisanslanmıştır.
