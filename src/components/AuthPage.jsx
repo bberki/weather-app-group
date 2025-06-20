@@ -11,6 +11,7 @@ function AuthPage( { onLogin }){
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+
         if (email && password) {
             try {
                 const res = await fetch(`${API_URL}/login`, {
@@ -25,6 +26,7 @@ function AuthPage( { onLogin }){
             } catch {
                 alert('Giriş başarısız');
             }
+
         }
     };
 

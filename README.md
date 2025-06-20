@@ -7,6 +7,8 @@ Meteosphere, React ve Vite kullanılarak geliştirilmiş basit bir hava durumu u
 - Ankara, İstanbul ve İzmir için mock hava durumu verileri
 - Şehir arama ve sonuçları arasında gezinme
 - Giriş yapmış kullanıcılar için yorum ekleme
+- Yorumlar `/api/comments/:city` adresinden yüklenir
+- Yeni yorumlar JWT ile `/api/comments` adresine gönderilir
 
 ## Kurulum
 
