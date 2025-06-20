@@ -4,6 +4,8 @@ import SearchBar from './components/searchbar';
 import WeatherCard from './components/WeatherCard';
 import './App.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 function App() {
   const [user, setUser] = useState(null);
   const [weatherList, setWeatherList] = useState([]);
@@ -24,79 +26,27 @@ function App() {
     document.body.style.padding = "0";
   }, [weatherList, currentIndex]);
 
-  const handleSearch = (cityId) => {
-    const mockDatabase = {
-      ankara: {
-        id: "ankara",
-        location_name: "Ankara",
-        latitude: 39.9288,
-        longitude: 32.8541,
-        datetime: new Date().toISOString(),
-        temperature: 24.5,
-        humidity: 60,
-        weather_description: "Açık",
-        wind_speed: 5.4,
-        wind_direction: 270,
-        pressure: 1013,
-        icon_code: "01d",
-        expertOpinions: [
-          "Önümüzdeki hafta sıcaklıklar mevsim normallerinde olacak.",
-          "Rüzgar güneybatı yönünden esecek, tarım faaliyetleri için uygun." 
-        ],
-      },
-      istanbul: {
-        id: "istanbul",
-        location_name: "İstanbul",
-        latitude: 41.0082,
-        longitude: 28.9784,
-        datetime: new Date().toISOString(),
-        temperature: 20.1,
-        humidity: 68,
-        weather_description: "Bulutlu",
-        wind_speed: 4.3,
-        wind_direction: 120,
-        pressure: 1012,
-        icon_code: "03d",
-        expertOpinions: [
-          "Nem oranı yüksek, kronik rahatsızlığı olanlar dikkatli olmalı.",
-          "Yağış ihtimali düşük, hava çoğunlukla bulutlu seyredecek." 
-        ],
-      },
-      izmir: {
-        id: "izmir",
-        location_name: "İzmir",
-        latitude: 38.4192,
-        longitude: 27.1287,
-        datetime: new Date().toISOString(),
-        temperature: 27.4,
-        humidity: 55,
-        weather_description: "Parçalı Bulutlu",
-        wind_speed: 3.9,
-        wind_direction: 90,
-        pressure: 1009,
-        icon_code: "02d",
-        expertOpinions: [
-          "Parçalı bulutlu hava deniz ulaşımını etkilemeyecek.",
-          "Hafta sonu sıcaklıklar birkaç derece artacak." 
-        ],
-      }
-    };
+  const handleSearch = async (cityId) => {
+    if (!cityId) return;
 
-    const alreadyExists = weatherList.some(item => item.id === cityId);
-    if (alreadyExists) {
-      alert("Bu şehir zaten eklendi.");
-      return;
-    }
-    if(!cityId)return;
-    const mockData = mockDatabase[cityId];
-    if (mockData) {
-      setWeatherList(prev => {
-        const updated = [...prev, mockData];
-        setCurrentIndex(updated.length - 1); // kritik düzeltme
+    try {
+      const res = await fetch(`${API_URL}/weather/${cityId}`);
+      if (!res.ok) throw new Error('not found');
+      const data = await res.json();
+
+      const alreadyExists = weatherList.some((item) => item.id === data.id);
+      if (alreadyExists) {
+        alert('Bu şehir zaten eklendi.');
+        return;
+      }
+
+      setWeatherList((prev) => {
+        const updated = [...prev, data];
+        setCurrentIndex(updated.length - 1);
         return updated;
       });
-    } else {
-      alert("Bu şehir için test verisi yok.");
+    } catch {
+      alert('Şehir bulunamadı');
     }
   };
 
@@ -115,6 +65,7 @@ function App() {
     setWeatherList([]);
     setCurrentIndex(0);
     document.body.style.backgroundImage = "none";
+    localStorage.removeItem('token');
   };
 
   return (
@@ -130,12 +81,17 @@ function App() {
         </div>
       )}
 
-      <header className="app-header">
-        <h1>Meteosphere🌤️</h1>
+      <header className="app-header flex justify-between items-center w-full max-w-2xl p-4 bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 text-white rounded-md">
+        <h1 className="text-xl font-semibold">Meteosphere🌤️</h1>
         {user && (
-          <div className="user-info">
-            <span className="user-email">{user.email}</span>
-            <button className="logout-btn" onClick={handleLogout}>Çıkış Yap</button>
+          <div className="flex items-center gap-2">
+            <span className="text-sm">{user.email}</span>
+            <button
+              className="bg-red-600 hover:bg-red-700 text-white py-1 px-3 rounded"
+              onClick={handleLogout}
+            >
+              Çıkış Yap
+            </button>
           </div>
         )}
       </header>
