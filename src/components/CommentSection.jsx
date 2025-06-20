@@ -1,38 +1,67 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 
-function CommentSection ( { city , user}) {
-    const [comment, setComment ] = useState("");
-    const [ comments, setComments ] = useState([]);
+function CommentSection ({ city, user }) {
+    const [comment, setComment] = useState("");
+    const [comments, setComments] = useState([]);
 
-    const handleSubmit = () => {
-        if(!comment.trim()) return;
-        const newComment = {
-            user: user.email,
-            text: comment,
-            date: new Date().toLocaleString("tr-TR"),
-        };
-        setComments([newComment, ...comments]);
-        setComment("");
+    useEffect(() => {
+        async function load() {
+            try {
+                const res = await fetch(`/api/comments/${city}`);
+                if (res.ok) {
+                    const data = await res.json();
+                    setComments(data);
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        load();
+    }, [city]);
+
+    const handleSubmit = async () => {
+        if (!comment.trim()) return;
+
+        try {
+            const res = await fetch('/api/comments', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${user.token}`,
+                },
+                body: JSON.stringify({ city, text: comment }),
+            });
+            if (res.ok) {
+                const saved = await res.json();
+                setComments([saved, ...comments]);
+                setComment('');
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
-
-
-    if(!user) {
-        return <p className="comment-warning">Yorum yapabilmek icin giris yapiniz.</p>;
-    }
 
     return (
         <div className="comment-section">
-            <textarea
-                className="comment-input"
-                placeholder={`${city} için yorumunuzu yazın...`}
-                value={comment}
-                onChange={(e) => setComment(e.target.value)}
-                rows={2}
-            />
-            <button className="comment-button" onClick={handleSubmit}>
-                Gonder
-            </button>
+            {user ? (
+                <>
+                    <textarea
+                        className="comment-input"
+                        placeholder={`${city} için yorumunuzu yazın...`}
+                        value={comment}
+                        onChange={(e) => setComment(e.target.value)}
+                        rows={2}
+                    />
+                    <button className="comment-button" onClick={handleSubmit}>
+                        Gonder
+                    </button>
+                </>
+            ) : (
+                <p className="comment-warning">
+                    Yorum yapabilmek icin giris yapiniz.
+                </p>
+            )}
 
             <ul className="comment-list">
                 {comments.map((c, i) => (
